@@ -22,5 +22,7 @@ public enum GamePackets : ushort
 
     TM_CS_REPORT = 8000,
 
+    TM_SC_URL_LIST = 9001,
+
     TM_NONE = 9999
 }

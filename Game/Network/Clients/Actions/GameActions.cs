@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Navislamia.Game.Character.Interfaces;
 using Navislamia.Game.Creature.Interfaces;
 using Navislamia.Game.DataAccess.Entities.Enums;
 using Navislamia.Game.DataAccess.Entities.Telecaster;
@@ -14,7 +15,6 @@ using Navislamia.Game.Network.Packets.Auth;
 using Navislamia.Game.Network.Packets.Enums;
 using Navislamia.Game.Network.Packets.Game;
 using Navislamia.Game.Network.Packets.Interfaces;
-using Navislamia.Game.Services;
 using Serilog;
 
 namespace Navislamia.Game.Network.Clients.Actions;
@@ -76,7 +76,9 @@ public class GameActions : IActions
         {
             _logger.Error("Duplicate login attempt, account {accountName}@{characterName}", client.ConnectionInfo.AccountName, message.Name);
 
-            // TODO: Save, if login then logout 
+            // TODO: Get Player object
+            // Save
+            // Disconnect
 
             client.SendDisconnectDescription(DisconnectType.DuplicatedLogin);
 
@@ -88,6 +90,17 @@ public class GameActions : IActions
         client.ConnectionInfo.StorageSecurityCheck = false;
 
         // TODO: Send urlist
+        if (!string.IsNullOrEmpty(client.Options.UrlList))
+        {
+            var urlList = $"{client.Options.UrlList}|guild_icon_upload.url|{client.Options.GuildIconBaseUrl}";
+
+            var msg = new Packet<TS_SC_URL_LIST>((ushort)GamePackets.TM_SC_URL_LIST, new TS_SC_URL_LIST((ushort)urlList.Length));
+
+            Buffer.BlockCopy(urlList.ToCharArray(), 0, packet.Data, (ushort)msg.HeaderStruct.Length, urlList.Length);
+
+            client.Connection.Send(packet.Data);
+        }
+
         // TODO: execute DB_Login
 
         _logger.Fatal("On Login Not Implemented!");
@@ -342,7 +355,6 @@ public class GameActions : IActions
 
         client.SendResult(packet.Id, (ushort)ResultCode.Success);
     }
-
 
     private void OnAccountWithAuth(GameClient client, IPacket packet)
     {

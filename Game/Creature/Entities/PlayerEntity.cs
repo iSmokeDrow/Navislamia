@@ -10,7 +10,7 @@ namespace Navislamia.Game.Creature.Entities
 {
     public class PlayerEntity : CreatureEntity
     {
-        public int Handle { get; set; }
+        public uint Handle { get; set; }
 
         public IConnection Connection { get; set; }
     }

@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Navislamia.Configuration.Options;
 using Navislamia.Game;
+using Navislamia.Game.Character;
+using Navislamia.Game.Character.Interfaces;
 using Navislamia.Game.Creature.Interfaces;
 using Navislamia.Game.Creature.Services;
 using Navislamia.Game.DataAccess.Contexts;
@@ -16,7 +18,6 @@ using Navislamia.Game.Maps;
 using Navislamia.Game.Network;
 using Navislamia.Game.Network.Interfaces;
 using Navislamia.Game.Scripting;
-using Navislamia.Game.Services;
 using Serilog;
 using Serilog.Exceptions;
 
@@ -82,6 +83,7 @@ public class Program
         services.Configure<ScriptOptions>(context.Configuration.GetSection("Script"));
         services.Configure<MapOptions>(context.Configuration.GetSection("Map"));
         services.Configure<ServerOptions>(context.Configuration.GetSection("Server"));
+        services.Configure<EngineOptions>(context.Configuration.GetSection("Engine"));
     }
 
     private static void ConfigureServices(IServiceCollection services)

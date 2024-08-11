@@ -9,10 +9,10 @@ namespace Navislamia.Game.Utilities
     public class HandleUtility
     {
 
-        public HashSet<int> ClaimedHandles = new HashSet<int>();
-        public static HashSet<int> CachedHandles = new HashSet<int>();
+        public HashSet<uint> ClaimedHandles = new HashSet<uint>();
+        public static HashSet<uint> CachedHandles = new HashSet<uint>();
 
-        public int GenerateHandle()
+        public uint GenerateHandle()
         {
             lock (ClaimedHandles)
             {
@@ -23,7 +23,7 @@ namespace Navislamia.Game.Utilities
                     return 0;
                 }
 
-                int maxId = ClaimedHandles.Max() + 1;
+                uint maxId = ClaimedHandles.Max() + 1;
 
                 ClaimedHandles.Add(maxId);
 
@@ -31,7 +31,7 @@ namespace Navislamia.Game.Utilities
             }
         }
 
-        public void ReleaseHandle(int handle)
+        public void ReleaseHandle(uint handle)
         {
             lock (ClaimedHandles) 
             {

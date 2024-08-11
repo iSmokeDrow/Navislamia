@@ -3,13 +3,13 @@ using System.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Navislamia.Configuration.Options;
+using Navislamia.Game.Character.Interfaces;
 using Navislamia.Game.Creature.Interfaces;
 using Navislamia.Game.DataAccess.Repositories.Interfaces;
 using Navislamia.Game.Network.Clients;
 using Navislamia.Game.Network.Interfaces;
 using Navislamia.Game.Network.Packets;
 using Navislamia.Game.Network.Packets.Interfaces;
-using Navislamia.Game.Services;
 
 namespace Navislamia.Game.Network;
 

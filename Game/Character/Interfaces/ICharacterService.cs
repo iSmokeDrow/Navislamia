@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Navislamia.Game.DataAccess.Entities.Telecaster;
 
-namespace Navislamia.Game.Services;
+namespace Navislamia.Game.Character.Interfaces;
 
 public interface ICharacterService
 {
@@ -13,7 +13,7 @@ public interface ICharacterService
     bool CharacterExists(string characterName);
 
     int CharacterCount(int accountId);
-    
+
     CharacterEntity GetCharacterByName(string characterName);
 
     Task DeleteCharacterByNameAsync(string characterName);

@@ -24,7 +24,5 @@ namespace Navislamia.Game.World
         WorldRegion _region = null;
 
         ulong _listIndex, _activeIndex = 0;
-
-        protected ConnectionInfo _connectionInfo = null;
     }
 }

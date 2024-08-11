@@ -6,7 +6,6 @@ using Navislamia.Configuration.Options;
 using Navislamia.Game.Network;
 using Navislamia.Game.Maps;
 using Navislamia.Game.Scripting;
-using Navislamia.Game.Services;
 using Microsoft.Extensions.Logging;
 using Navislamia.Game.Network.Packets;
 using System.Net.Sockets;
@@ -18,6 +17,7 @@ using Navislamia.Game.Network.Interfaces;
 using Navislamia.Game.Network.Packets.Auth;
 using Navislamia.Game.Network.Packets.Enums;
 using Navislamia.Game.Network.Packets.Upload;
+using Navislamia.Game.Character.Interfaces;
 
 namespace Navislamia.Game;
 

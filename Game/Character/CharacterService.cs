@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Navislamia.Game.Character.Interfaces;
 using Navislamia.Game.DataAccess.Entities.Enums;
 using Navislamia.Game.DataAccess.Entities.Telecaster;
 using Navislamia.Game.DataAccess.Repositories.Interfaces;
-
 using Serilog;
 
-namespace Navislamia.Game.Services;
+namespace Navislamia.Game.Character;
 
 public class CharacterService : ICharacterService
 {
@@ -32,7 +32,7 @@ public class CharacterService : ICharacterService
         if (withStarterItems)
         {
             character.Items ??= new List<ItemEntity>();
-            
+
             var starterItems = await _starterItemsRepository.GetStarterItemsByJobAsync((Race)character.Race);
             foreach (var starterItem in starterItems)
             {
@@ -46,10 +46,10 @@ public class CharacterService : ICharacterService
                 });
             }
         }
-        
+
         var result = await _characterRepository.CreateCharacterAsync(character);
         await _characterRepository.SaveChangesAsync();
-        
+
         return result;
     }
 
